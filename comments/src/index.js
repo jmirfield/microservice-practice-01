@@ -1,9 +1,11 @@
 const express = require('express')
+const cors = require('cors')
 const { randomBytes } = require('crypto')
 const app = express()
 const PORT = 4001
 
 app.use(express.json())
+app.use(cors())
 
 const comments = {}
 
