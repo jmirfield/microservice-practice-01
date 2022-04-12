@@ -1,14 +1,13 @@
 import React from 'react';
-import CommentCreate from './CommentCreate';
+import Comments from './Comments';
 
 const PostList = ({ posts }) => {
     return (
         <ul className="container list-unstyled d-flex flex-wrap justify-content-between">
-            {posts.map(post => (
-                <li key={post.id} className='card mb-3'>
-                    <h3 className='card-body'>{post.post}</h3>
-                    <CommentCreate postId={post.id} />
-                    <CommentList list={[]} />
+            {Object.keys(posts).map(id => (
+                <li key={id} className='card mb-3'>
+                    <h4 className='card-body'>{posts[id].post}</h4>
+                    <Comments postId={id} list={posts[id].comments} />
                 </li>
             ))}
         </ul>

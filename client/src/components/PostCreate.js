@@ -9,7 +9,7 @@ const PostCreate = ({onPost}) => {
         setTitle('')
     }
     return (
-        <form className="container" onSubmit={submitHandler}>
+        <form className="container mb-4" onSubmit={submitHandler}>
             <div className="form-group">
                 <label>Create Post</label>
                 <input
