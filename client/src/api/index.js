@@ -1,30 +1,22 @@
 import axios from 'axios'
 
 //POST SERVICE
-const POSTS = axios.create({ baseURL: "http://localhost:4000/posts" })
-POSTS.defaults.headers.post['Content-Type'] = 'application/json'
-
-//COMMENT SERVICE
-const COMMENTS = axios.create({ baseURL: "http://localhost:4001/posts" })
-COMMENTS.defaults.headers.post['Content-Type'] = 'application/json'
-
-//QUERY SERVICE
-const QUERY = axios.create({ baseURL: "http://localhost:4002/posts" })
-QUERY.defaults.headers.post['Content-Type'] = 'application/json'
+const API = axios.create({ baseURL: "http://posts.com/posts" })
+API.defaults.headers.post['Content-Type'] = 'application/json'
 
 export const createPost = async (title, setPosts) => {
-    const { data } = await POSTS.post('', { title })
+    const { data } = await API.post('/create', { title })
     setPosts(prev => ({ [data.id]: { post: data.post, comments: [] }, ...prev }))
 }
 
 export const getPosts = async (setPosts) => {
-    const { data } = await QUERY.get('')
+    const { data } = await API.get('')
     console.log(data)
     setPosts(data)
 }
 
 export const createComment = async (id, comment, onAdd) => {
-    const { data } = await COMMENTS.post(`/${id}/comment`, { comment })
+    const { data } = await API.post(`/${id}/comment`, { comment })
     onAdd((prev) => [...prev, data])
 }
 
