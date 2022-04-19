@@ -30,6 +30,7 @@ app.get('/posts', (req, res) => {
 })
 
 app.post('/events', async (req, res) => {
+    console.log(req.body)
     const { type, data } = req.body
     handleEvents(type, data)
     res.send()
@@ -40,7 +41,7 @@ app.post('/events', async (req, res) => {
 app.listen(PORT, async () => {
     console.log(`Listening on port: ${PORT}`)
     try {
-        const response = await axios.get('http://localhost:4005/events')
+        const response = await axios.get('http://event-bus-clusterip-srv:4005/events')
         for (let e of response.data) {
             console.log('Processing event: ' + e.type)
             handleEvents(e.type, e.data)

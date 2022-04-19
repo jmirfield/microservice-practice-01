@@ -21,7 +21,7 @@ app.post('/posts/:id/comment', async (req, res) => {
     const postComments = comments[postId] || []
     postComments.push(comment)
     comments[postId] = postComments
-    await axios.post('http://localhost:4005/events', {
+    await axios.post('http://event-bus-clusterip-srv:4005/events', {
         type: 'CommentCreated',
         data: { ...comment, postId }
     })
@@ -29,11 +29,12 @@ app.post('/posts/:id/comment', async (req, res) => {
 })
 
 app.post('/events', async (req, res) => {
+    console.log(req.body)
     if (req.body.type === 'CommentModerated') {
         const { postId, id, status } = req.body.data
         const comment = comments[postId].find(comment => comment.id === id)
         comment.status = status
-        await axios.post('http://localhost:4005/events', {
+        await axios.post('http://event-bus-clusterip-srv:4005/events', {
             type: 'CommentUpdated',
             data: { comment, postId }
         })
