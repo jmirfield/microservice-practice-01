@@ -18,7 +18,7 @@ app.post('/posts', async (req, res) => {
     const id = randomBytes(4).toString('hex')
     const { title } = req.body
     posts[id] = title
-    await axios.post('http://localhost:4005/events', {
+    await axios.post('http://event-bus-clusterip-srv:4005/events', {
         type: 'PostCreated',
         data: { id, post: posts[id] }
     })
@@ -26,7 +26,9 @@ app.post('/posts', async (req, res) => {
 })
 
 app.post('/events', (req, res) => {
+    console.log(req.body)
     res.send()
 })
 
-app.listen(PORT, () => console.log(`Listening on port: ${PORT}`))
+
+app.listen(PORT, () => console.log(`Listening on port: ${PORT} --- Hello world v2`))
