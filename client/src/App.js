@@ -10,7 +10,7 @@ const App = () => {
     }, [])
     return (
         <div className="container mt-4">
-            <h1 className="mb-3">Entry Point, Hello world</h1>
+            <h1 className="mb-3">Entry Point, Hello world with Skaffold</h1>
             <PostCreate onPost={setPosts}/>
             <h2>Posts</h2>
             <PostList posts={posts} />
